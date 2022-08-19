@@ -1,0 +1,23 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import MRC from "../components/MRC/MRC";
+// https://dev.to/api/articles?username=nataliedeweerd
+// https://dev.to/api/articles/1136386
+const posts = await fetch("https://dev.to/api/articles?username=nataliedeweerd")
+	.then((res) => res.json())
+	.then((data) => data);
+---
+
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<MRC posts={posts} client:load />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<h1>Hey fellas</h1>
+	</body>
+</html>
